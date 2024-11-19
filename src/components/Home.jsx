@@ -86,7 +86,7 @@ const Home = () => {
   useEffect(() => {
     const fetchWaterparks = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/api/waterparks`);
+        const response = await axios.get(`https://waterpark-be.onrender.com/api/waterparks`);
         setResorts(response.data.waterparks);
         console.log("Waterparks fetched:", response.data);
       } catch (error) {
