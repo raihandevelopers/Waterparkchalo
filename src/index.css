@@ -296,7 +296,7 @@ flex: 1;
 .homepage{
   width: 100%;
   height: 100%;
-
+  overflow-x: hidden;
   
 }
 .page1{
@@ -534,18 +534,19 @@ background-color: #fff;
 
 .homeinfo{
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: start;
+  align-items: start;
   flex-direction: column;
   font-size: 30px;
 
 }
 .homeinfop{
-  font-size: 40px;
- text-align: center;
- font-weight: 600;
-   color: #1997e3;
-   
+  font-size: 25px;
+ text-align: start;
+ font-weight: 400;
+   color: #fff;
+   padding: 30px;
+   margin-bottom: -30px;
 }
 .carousel-card {
   position: relative;
@@ -913,8 +914,10 @@ input[type="date"] {
 
 
 .homeinfop{
+  width: 100%;
   font-size: x-large;
   font-weight: bold;
+  background-color: #234778;
 }
 
 .checkout{

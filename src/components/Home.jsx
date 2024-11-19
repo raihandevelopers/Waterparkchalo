@@ -36,7 +36,7 @@ import { useNavigate } from "react-router-dom";
     return (
       <div className="card">
         <div className="card-image">
-          <img src={resort.images[0] || "default-image.png"} alt={resort.name} />
+          <img src={resort.images[0] || "https://newdemo.rreda.in/wp-content/uploads/2024/11/manas-636x426.jpg"} alt={resort.name} />
         </div>
         <div className="card-content">
           <h3 className="font-semibold">{resort.name || "Unnamed Resort"}</h3>
@@ -106,12 +106,12 @@ const Home = () => {
   className="w-24 h-24 fixed z-[10] top-[75vh] cursor-pointer"
   onClick={() => window.open("https://wa.me/918847714464", "_blank")}
 />
-      <div className="carousel-card">
+      <div className="carousel-card" >
       <button className="carousel-button left" onClick={goToPrevious}>
         &#10094;
       </button>
 
-      <div className="carousel-image">
+      <div className="carousel-image" >
         <img src={images[currentIndex]} alt={`Slide ${currentIndex}`} />
       </div>
 
@@ -123,8 +123,10 @@ const Home = () => {
     </div>
 
       <div className="homeinfo">
-        <p className="homeinfop">Popular Resorts</p>
-        <p className="homeinfop">Creating Memories, One Adventure at a Time</p>
+        <p className="homeinfop">Most Popular Tour</p>
+        <p className="homeinfop">Your Ultimate Destination for Fun and Adventure!
+
+</p>
       </div>
     <div className="card-container">
       {resorts.map((resort, index) => (

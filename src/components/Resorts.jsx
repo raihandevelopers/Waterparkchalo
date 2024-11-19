@@ -197,7 +197,7 @@ const Resorts = () => {
   };
 
   return (
-    <>
+    <div style={{ overflowx: 'hidden'}}>
       <div className="carousel-card">
         <button className="carousel-button left" onClick={goToPrevious}>
           &#10094;
@@ -533,7 +533,7 @@ const Resorts = () => {
       </div>
 
 
-    </>
+    </div>
   );
 };
 
