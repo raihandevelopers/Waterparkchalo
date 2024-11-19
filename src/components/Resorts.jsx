@@ -182,6 +182,19 @@ const Resorts = () => {
 
 
 
+  const handleCheckout = () => {
+    const data = {
+      adultCount: adultCount, 
+      childCount: childCount,
+      date:selectedDate,
+      resortName: resort.name, 
+      subtotal: subtotal,
+      deposit: dtotal,
+      resortId: resort._id,
+    };
+
+    navigate('/checkout', { state: data });
+  };
 
   return (
     <>
@@ -515,7 +528,7 @@ const Resorts = () => {
 
 
         </div> */}
-        <button onClick={() => navigate('/checkout')} // Navigate to /checkout
+        <button onClick={handleCheckout} // Navigate to /checkout
           className='px-4 py-2 w-full rounded-xl bg-[#0156b3] text-white font-semibold my-10'>Continue Booking</button>
       </div>
 

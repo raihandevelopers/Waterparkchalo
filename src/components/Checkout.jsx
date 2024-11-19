@@ -1,6 +1,11 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 function CheckoutPage() {
+  const location = useLocation();
+
+  const { adultCount, childCount, date, resortName, subtotal, deposit } = location.state || {}; // Destructure data from location
+
   const [billingDetails, setBillingDetails] = useState({
     firstName: "",
     lastName: "",
@@ -8,9 +13,11 @@ function CheckoutPage() {
     email: "",
     city: "",
     createAccount: false,
+    total : subtotal
   });
 
   const [paymentMethod, setPaymentMethod] = useState("cash");
+
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -28,8 +35,77 @@ function CheckoutPage() {
     e.preventDefault();
     console.log("Order placed with details:", billingDetails, paymentMethod);
   };
-
-  return (
+  const handlePayment = async () => {
+    try {
+      // Create a booking and generate Razorpay order
+      const response = await axios.post("http://localhost:5000/api/bookings/create", {
+        waterpark: resort._id,
+        name: `${billingDetails.firstName} ${billingDetails.lastName}`,
+        email: billingDetails.email,
+        phone: billingDetails.phone,
+        date: date,
+        adults: adultCount,
+        children: childCount,
+        totalPrice: subtotal,
+      });
+  
+      const { success, orderId, booking, razorpayOrder, message } = response.data;
+  
+      if (!success) {
+        console.error("Error:", message);
+        alert("Failed to create booking. Please try again.");
+        return;
+      }
+  
+      // Initialize Razorpay payment
+      const { amount, currency, id: order_id } = razorpayOrder;
+      const options = {
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID, // Add Razorpay key in environment variables
+        amount,
+        currency,
+        name: resortName,
+        description: "Booking Payment",
+        order_id,
+        handler: async (paymentResponse) => {
+          try {
+            // Verify payment and update booking
+            const verifyResponse = await axios.post("http://localhost:5000/api/bookings/verify", {
+              razorpayOrderId: order_id,
+              razorpayPaymentId: paymentResponse.razorpay_payment_id,
+              razorpaySignature: paymentResponse.razorpay_signature,
+              bookingId: booking._id,
+            });
+  
+            const { success: verifySuccess, booking: updatedBooking, message: verifyMessage } = verifyResponse.data;
+  
+            if (verifySuccess && updatedBooking.paymentStatus === "Completed") {
+              alert("Payment Successful! Booking confirmed.");
+            } else {
+              console.error("Payment verification failed:", verifyMessage);
+              alert("Payment verification failed. Please contact support.");
+            }
+          } catch (error) {
+            console.error("Error verifying payment:", error);
+            alert("Payment verification failed!");
+          }
+        },
+        prefill: {
+          name: `${billingDetails.firstName} ${billingDetails.lastName}`,
+          email: billingDetails.email,
+          contact: billingDetails.phone,
+        },
+        notes: { address: billingDetails.city },
+        theme: { color: "#0156b3" },
+      };
+  
+      const razorpay = new window.Razorpay(options);
+      razorpay.open();
+    } catch (error) {
+      console.error("Error initiating payment:", error);
+      alert("Payment initiation failed. Please try again.");
+    }
+  };
+    return (
     <div className="bg-gray-100 min-h-screen flex items-center justify-center py-10 px-4 my-10">
       <div className="bg-white rounded-lg shadow-lg max-w-4xl w-full p-8">
         <h1 className="text-3xl font-bold text-gray-800 text-center mb-6">Checkout</h1>
@@ -40,7 +116,7 @@ function CheckoutPage() {
           </a>
         </p>
 
-        <form onSubmit={handleSubmit} className="space-y-8">
+        <form onSubmit={handlePayment} className="space-y-8">
           {/* Billing Details Section */}
           <div>
             <h2 className="text-xl font-semibold text-gray-800 mb-4">Billing Details</h2>
@@ -97,25 +173,29 @@ function CheckoutPage() {
                 <tbody>
                   <tr className="border-b">
                     <td className="py-3 px-4">
-                      Manthan Waterpark and Beach Resort x 1
+                      {resortName} x 1
                       <br />
                       <span className="text-sm text-gray-500">
-                        Check-in: 18-11-2024 | Adults: 1
+                        Check-in: {date} | Adults: {adultCount} | Children: {childCount}
                       </span>
                     </td>
-                    <td className="py-3 px-4">₹550.00</td>
+                    <td className="py-3 px-4">₹{subtotal}</td>
                   </tr>
                   <tr className="border-b">
                     <td className="py-3 px-4">Deposit:</td>
-                    <td className="py-3 px-4">₹100.00</td>
+                    <td className="py-3 px-4">₹{deposit}</td>
                   </tr>
                   <tr className="border-b">
                     <td className="py-3 px-4">Remaining:</td>
-                    <td className="py-3 px-4">₹450.00</td>
+                    <td className="py-3 px-4">₹{subtotal - deposit}</td>
                   </tr>
                   <tr>
                     <td className="py-3 px-4 font-semibold">Total payable:</td>
-                    <td className="py-3 px-4 font-semibold">₹550.00</td>
+                    <td className="py-3 px-4 font-semibold">₹{subtotal}</td>
+                  </tr>
+                  <tr>
+                    <td className="py-3 px-4 font-semibold">Payable deposit:</td>
+                    <td className="py-3 px-4 font-semibold">₹{deposit}</td>
                   </tr>
                 </tbody>
               </table>
@@ -155,10 +235,11 @@ function CheckoutPage() {
 
           <button
             type="submit"
+            onClick={handlePayment}
             className="w-full py-3 text-white bg-[#0156b3] rounded-lg text-lg font-medium hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300"
           >
-            Place Order
-          </button>
+            Pay ₹{deposit} Now
+            </button>
         </form>
       </div>
     </div>
