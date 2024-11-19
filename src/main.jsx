@@ -14,7 +14,7 @@ import CheckoutPage from './components/Checkout.jsx'
 
 
 import Admin from './components/Admin'
-import UserDetails from './components/userDetails'
+import UserDetails from './components/UserDetails.jsx'
 
 
 
