@@ -6,7 +6,7 @@ const EditWaterparkList = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_SERVER_URL}/api/waterparks`)
+    fetch(`https://waterpark-be.onrender.com/api/waterparks`)
       .then((response) => response.json())
       .then((data) => setWaterparks(data.waterparks))
       .catch((error) => console.error("Error fetching waterparks:", error));

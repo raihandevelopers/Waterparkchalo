@@ -28,7 +28,7 @@ export default function AuthPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const apiUrl = `${import.meta.env.VITE_SERVER_URL}/api/auth/${
+    const apiUrl = `https://waterpark-be.onrender.com/api/auth/${
       tabIndex === 0 ? "login" : "signup"
     }`;
 

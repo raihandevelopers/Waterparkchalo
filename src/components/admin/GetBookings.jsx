@@ -9,7 +9,7 @@ const GetBookings = () => {
   useEffect(() => {
     // Fetch bookings from the backend
     axios
-      .get(`${import.meta.env.VITE_SERVER_URL}/api/bookings/all`)
+      .get(`https://waterpark-be.onrender.com/api/bookings/all`)
       .then((response) => {
         setBookings(response.data); // Set the bookings data to state
         setLoading(false); // Set loading to false after data is fetched
