@@ -11,6 +11,7 @@ const GetBookings = () => {
     axios
       .get(`https://waterpark-be.onrender.com/api/bookings/all`)
       .then((response) => {
+        console.log("Bookings fetched:", response.data);
         setBookings(response.data); // Set the bookings data to state
         setLoading(false); // Set loading to false after data is fetched
       })
@@ -39,19 +40,29 @@ const GetBookings = () => {
               <th className="px-4 py-2 text-left">Customer Name</th>
               <th className="px-4 py-2 text-left">Waterpark</th>
               <th className="px-4 py-2 text-left">Booking Date</th>
-              <th className="px-4 py-2 text-left">Amount</th>
-              <th className="px-4 py-2 text-left">Status</th>
+              <th className="px-4 py-2 text-left">Email</th>
+              <th className="px-4 py-2 text-left">Total Price</th>
+              <th className="px-4 py-2 text-left">Phone</th>
+              <th className="px-4 py-2 text-left">Adults</th>
+              <th className="px-4 py-2 text-left">children</th>
+              <th className="px-4 py-2 text-left">Payment Status</th>
+              <th className="px-4 py-2 text-left">Payment Type</th>
             </tr>
           </thead>
           <tbody>
             {bookings.length > 0 ? (
               bookings.map((booking) => (
                 <tr key={booking._id}>
-                  <td className="px-4 py-2">{booking.customerName}</td>
+                  <td className="px-4 py-2">{booking.name}</td>
                   <td className="px-4 py-2">{booking.waterparkName}</td>
-                  <td className="px-4 py-2">{new Date(booking.bookingDate).toLocaleDateString()}</td>
-                  <td className="px-4 py-2">{booking.amount}</td>
-                  <td className="px-4 py-2">{booking.status}</td>
+                  <td className="px-4 py-2">{new Date(booking.date).toLocaleDateString()}</td>
+                  <td className="px-4 py-2">{booking.email}</td>
+                  <td className="px-4 py-2">{booking.totalPrice}</td>
+                  <td className="px-4 py-2">{booking.phone}</td>
+                  <td className="px-4 py-2">{booking.adults}</td>
+                  <td className="px-4 py-2">{booking.children}</td>
+                  <td className="px-4 py-2">{booking.paymentStatus}</td>
+                  <td className="px-4 py-2">{booking.paymentType}</td>
                 </tr>
               ))
             ) : (

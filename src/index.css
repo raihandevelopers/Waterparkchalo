@@ -270,13 +270,27 @@ flex: 1;
   z-index: 999999;
 
 }
+.csl-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px; /* Optional, if you want rounded corners for the image */
+}
+.csl-image {
+  width: 100%;
+  height: 400px; /* Fixed height for stable space */
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px; /* Optional, if you want rounded corners */
+}
+
 
 .fbr{
   display: flex;
   gap: 10px;
   border-radius: 50px;
   object-fit: cover;
-  margin-top: 10px;
+  /* margin-top: 10px; */
 
 }
 
@@ -566,13 +580,6 @@ background-color: #fff;
   height: 100%;
   object-fit: cover;
   border-radius: 10px; /* Optional, if you want rounded corners for the image */
-}
-.carousel-image {
-  width: 100%;
-  height: 400px; /* Fixed height for stable space */
-  position: relative;
-  overflow: hidden;
-  border-radius: 10px; /* Optional, if you want rounded corners */
 }
 
 .carousel-button {
@@ -922,7 +929,7 @@ input[type="date"] {
 
 .homeinfop{
   width: 100%;
-  font-size: x-large;
+  font-size: 20px;
   font-weight: bold;
   background-color: #234778;
 }
@@ -1074,7 +1081,7 @@ z-index: 9999;
     left: 0;
     width: 70%;
     height: 100%;
-    background-color: #fff;
+    background-color: #222;
     flex-direction: column;
     align-items: start;
     justify-content: center;
@@ -1088,8 +1095,10 @@ z-index: 9999;
   }
 
   .nav-link {
-    margin: 10px 0;
-    font-size: 20px;
+    /* margin: 10px 0; */
+    font-size: 15px;
+    color: white;
+
   }
 }
 

@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 function CheckoutPage() {
   const location = useLocation();
+  const navigate = useNavigate();
 
-  const { adultCount, childCount, date, resortName, subtotal, deposit } = location.state || {}; // Destructure data from location
+  const { adultCount, childCount, date, resortName, subtotal, deposit, resortId } = location.state || {}; // Destructure data from location
 
   const [billingDetails, setBillingDetails] = useState({
     firstName: "",
@@ -13,7 +16,7 @@ function CheckoutPage() {
     email: "",
     city: "",
     createAccount: false,
-    total : subtotal
+    total: subtotal
   });
 
   const [paymentMethod, setPaymentMethod] = useState("cash");
@@ -35,15 +38,18 @@ function CheckoutPage() {
     e.preventDefault();
     console.log("Order placed with details:", billingDetails, paymentMethod);
   };
-  const handlePayment = async () => {
-    if(billingDetails.email === "" || billingDetails.firstName === "" || billingDetails.lastName === "" || billingDetails.phone === "" || billingDetails.city === ""){
+  const handlePayment = async (e) => {
+    e.preventDefault();
+    if (billingDetails.email === "" || billingDetails.firstName === "" || billingDetails.lastName === "" || billingDetails.phone === "" || billingDetails.city === "") {
       alert("Please fill all the details");
       return;
     }
     try {
+      console.log("Order placed with details:", billingDetails, paymentMethod, resortId);
       // Create a booking and generate Razorpay order
       const response = await axios.post("https://waterpark-be.onrender.com/api/bookings/create", {
-        waterpark: resort._id,
+        waterpark: resortId,
+        waterparkName: resortName,
         name: `${billingDetails.firstName} ${billingDetails.lastName}`,
         email: billingDetails.email,
         phone: billingDetails.phone,
@@ -51,16 +57,24 @@ function CheckoutPage() {
         adults: adultCount,
         children: childCount,
         totalPrice: subtotal,
+        paymentType: paymentMethod
       });
-  
       const { success, orderId, booking, razorpayOrder, message } = response.data;
-  
+
       if (!success) {
         console.error("Error:", message);
         alert("Failed to create booking. Please try again.");
         return;
       }
-  
+      if (paymentMethod === "cash") {
+        console.log("Booking created:", booking);
+        // Navigate to the ticket page with booking details as route params
+        navigate("/ticket", { state: { booking } });
+        return;
+      }
+
+
+
       // Initialize Razorpay payment
       const { amount, currency, id: order_id } = razorpayOrder;
       const options = {
@@ -79,9 +93,9 @@ function CheckoutPage() {
               razorpaySignature: paymentResponse.razorpay_signature,
               bookingId: booking._id,
             });
-  
+
             const { success: verifySuccess, booking: updatedBooking, message: verifyMessage } = verifyResponse.data;
-  
+
             if (verifySuccess && updatedBooking.paymentStatus === "Completed") {
               alert("Payment Successful! Booking confirmed.");
             } else {
@@ -101,7 +115,7 @@ function CheckoutPage() {
         notes: { address: billingDetails.city },
         theme: { color: "#0156b3" },
       };
-  
+
       const razorpay = new window.Razorpay(options);
       razorpay.open();
     } catch (error) {
@@ -109,7 +123,7 @@ function CheckoutPage() {
       alert("Payment initiation failed. Please try again.");
     }
   };
-    return (
+  return (
     <div className="bg-gray-100 min-h-screen flex items-center justify-center py-10 px-4 my-10">
       <div className="bg-white rounded-lg shadow-lg max-w-4xl w-full p-8">
         <h1 className="text-3xl font-bold text-gray-800 text-center mb-6">Checkout</h1>
@@ -120,7 +134,7 @@ function CheckoutPage() {
           </a>
         </p>
 
-        <form onSubmit={handlePayment} className="space-y-8">
+        <form  className="space-y-8">
           {/* Billing Details Section */}
           <div>
             <h2 className="text-xl font-semibold text-gray-800 mb-4">Billing Details</h2>
@@ -243,7 +257,7 @@ function CheckoutPage() {
             className="w-full py-3 text-white bg-[#0156b3] rounded-lg text-lg font-medium hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300"
           >
             Pay ₹{deposit} Now
-            </button>
+          </button>
         </form>
       </div>
     </div>

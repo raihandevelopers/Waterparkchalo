@@ -1,13 +1,19 @@
 import React,{useEffect,useState} from "react";
 import axios from 'axios'
+import { useNavigate } from "react-router-dom";
 
 const WaterParks = () => {
   const [parks, setParks] = useState([]);
   const [loading, setLoading] = useState(true); // State to handle loading
+  const navigate = useNavigate();
+
+  const handleBookClick = (resort) => {
+    navigate("/resorts", { state: { resort } }); // Passing resort data via state
+  };
 
   useEffect(() => {
     const fetchWaterparks = async () => {
-      setLoading(true);
+      setLoading(true); 
       try {
         const response = await axios.get(`https://waterpark-be.onrender.com/api/waterparks`);
         setParks(response.data.waterparks);
@@ -62,7 +68,7 @@ const WaterParks = () => {
                       {park.originalPrice}
                     </span>
                   </div>
-                  <button className="bg-blue-600 text-white py-1 px-3 rounded">
+                  <button className="bg-blue-600 text-white py-1 px-3 rounded" onClick={()=>handleBookClick(park)}>
                     Book
                   </button>
                 </div>

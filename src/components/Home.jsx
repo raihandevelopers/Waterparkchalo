@@ -3,28 +3,6 @@ import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom'
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
-import TopBar from './TopNav'
-// const resorts = [
-//   {
-//     name: "Vaity Aqua",
-//     location: "Virar West",
-//     price: "₹550",
-//     originalPrice: "₹800",
-//     discount: "32% Off",
-//     imageUrl: "https://myresortbooking.in/public/uploads/resorts/thumbnail/17282234839123treanding%20vaity%20aqua.png",
-//     trending: true,
-//   },
-//   {
-//     name: "Manthan Resort",
-//     location: "Virar West",
-//     price: "₹550",
-//     originalPrice: "₹700",
-//     discount: "22% Off",
-//     imageUrl: "https://myresortbooking.in/public/uploads/resorts/thumbnail/17273967924412manthan%20resort2.png",
-//     trending: false,
-//   },
-
-// ];
 
 const Card = ({ resort }) => {
   const navigate = useNavigate();
@@ -117,8 +95,6 @@ const Home = () => {
 
 
   return (
-    <>
-    <TopBar />
     <div className="homepage">
       <img
         src="whatsapp.png"
@@ -181,8 +157,6 @@ const Home = () => {
 
       </div>
     </div>
-    </>
-
   );
 };
 

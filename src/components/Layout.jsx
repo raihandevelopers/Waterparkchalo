@@ -1,15 +1,19 @@
 import React from 'react'
-import Header from  "./Header"
+import Header from "./Header"
 import Footer from "./Footer"
-import {Outlet} from 'react-router-dom'
-
+import { Outlet } from 'react-router-dom'
+import TopBar from './TopNav'
 const Layout = () => {
   return (
     <>
-    <div className="moho"><Header/></div>
-    <Outlet/>
-    <div className="mofo"><Footer/></div>
-    
+      <div className="topbar">
+        <TopBar />
+      </div>
+
+      <div className="moho"><Header /></div>
+      <Outlet />
+      <div className="mofo"><Footer /></div>
+
     </>
   )
 }

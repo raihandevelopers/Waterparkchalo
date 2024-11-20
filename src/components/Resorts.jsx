@@ -127,7 +127,7 @@ const Resorts = () => {
     const data = {
       adultCount: adultCount,
       childCount: childCount,
-      date: selectedDate,
+      date: date,
       resortName: resort.name,
       subtotal: subtotal,
       deposit: dtotal,
@@ -144,7 +144,7 @@ const Resorts = () => {
           &#10094;
         </button>
 
-        <div className="carousel-image">
+        <div className="csl-image">
           <img src={images[currentIndex]} alt={`Slide ${currentIndex}`} />
         </div>
 

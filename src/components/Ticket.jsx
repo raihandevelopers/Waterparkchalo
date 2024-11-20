@@ -1,21 +1,28 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
-const WaterparkTicket = (props) => {
-  // Hardcoded data for testing
-  const {
-    name = "SAIL SURVE",
-    adults = 6,
-    children = 0,
-    total = 6,
-    date = "25/10/2024",
-    waterpark = "Sagar resort",
-    amount = "Rs:2700/-",
-    contact = "8983270305",
-  } = props;
+const WaterparkTicket = () => {
+  const location = useLocation();
+  const { booking } = location.state || {}; // Get the booking from route params
+  
+  // If no booking data is available, return a loading state or an error message
+  if (!booking) {
+    return <div>No booking information available.</div>;
+  }
 
-  // Function to download the ticket
+  const {
+    name,
+    adults,
+    children,
+    totalPrice,
+    date,
+    waterpark,
+    waterparkName,
+    phone,
+  } = booking;
+
   const handleDownload = () => {
     const ticketElement = document.getElementById("ticket");
     html2canvas(ticketElement).then((canvas) => {
@@ -46,22 +53,19 @@ const WaterparkTicket = (props) => {
               <span className="font-bold">Adults:</span> {adults}
             </p>
             <p>
-              <span className="font-bold">Child:</span> {children}
+              <span className="font-bold">Children:</span> {children}
             </p>
             <p>
-              <span className="font-bold">Total:</span> {total}
+              <span className="font-bold">Total Price:</span> Rs {totalPrice}/-
             </p>
             <p>
               <span className="font-bold">Date:</span> {date}
             </p>
             <p>
-              <span className="font-bold">Waterpark:</span> {waterpark}
+              <span className="font-bold">Waterpark:</span> {waterparkName}
             </p>
             <p>
-              <span className="font-bold">Total Amount to pay:</span> {amount}
-            </p>
-            <p>
-              <span className="font-bold">Contact:</span> {contact}
+              <span className="font-bold">Contact:</span> {phone}
             </p>
           </div>
         </div>

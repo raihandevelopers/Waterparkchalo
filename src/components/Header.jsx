@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../index.css";
 import { NavLink } from "react-router-dom";
-
+import TopBar from './TopNav'
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLogin, setIsLogin] = useState(localStorage.getItem("isLoggedIn"));
@@ -9,11 +9,17 @@ const Header = () => {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
+
 
   return (
     <>
-    <div className="uppernav">
-    </div>
+    {/* <div className="uppernav">
+    </div> */}
+        <TopBar/>
       <nav className="navbar">
         {/* Toggle Button */}
         <button
@@ -28,9 +34,9 @@ const Header = () => {
               viewBox="0 0 24 24"
               width="30"
               height="30"
-              fill="#000"
+              fill="#ffffff"
             >
-              <path d="M6 18L18 6M6 6L18 18" stroke="#000" strokeWidth="2" />
+              <path d="M6 18L18 6M6 6L18 18" stroke="#ffffff"  strokeWidth="2" />
             </svg>
           ) : (
             // Hamburger icon when menu is closed
@@ -54,6 +60,12 @@ const Header = () => {
             <img src="logo.png" alt="Logo" className="max-w-none " />
           </div>
         </a>
+        {isMenuOpen && (
+          <div
+            className="fixed inset-0 bg-black bg-opacity-50 z-10"
+            onClick={closeMenu} // Close the menu when clicking outside
+          ></div>
+        )}
 
       
         {/* Nav Links */}
@@ -76,19 +88,19 @@ const Header = () => {
               </svg>
             </NavLink>
           )}
-          <NavLink to="/" className="nav-link">
+          <NavLink to="/" className="nav-link" onClick={closeMenu}>
             Home
           </NavLink>
-          <NavLink to="/farmvilla" className="nav-link">
+          <NavLink to="/farmvilla" className="nav-link" onClick={closeMenu}>
             Water Parks
           </NavLink>
-          <NavLink to="/influencers" className="nav-link">
+          <NavLink to="/influencers" className="nav-link" onClick={closeMenu}>
             Gallery
           </NavLink>
-          <NavLink to="/about" className="nav-link">
+          <NavLink to="/about" className="nav-link" onClick={closeMenu}>
             About Us
           </NavLink>
-          <NavLink to="/contact" className="nav-link">
+          <NavLink to="/contact" className="nav-link" onClick={closeMenu}>
             Contact Us
           </NavLink>
         </div>
