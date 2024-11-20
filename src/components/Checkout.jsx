@@ -36,9 +36,13 @@ function CheckoutPage() {
     console.log("Order placed with details:", billingDetails, paymentMethod);
   };
   const handlePayment = async () => {
+    if(billingDetails.email === "" || billingDetails.firstName === "" || billingDetails.lastName === "" || billingDetails.phone === "" || billingDetails.city === ""){
+      alert("Please fill all the details");
+      return;
+    }
     try {
       // Create a booking and generate Razorpay order
-      const response = await axios.post("http://localhost:5000/api/bookings/create", {
+      const response = await axios.post("https://waterpark-be.onrender.com/api/bookings/create", {
         waterpark: resort._id,
         name: `${billingDetails.firstName} ${billingDetails.lastName}`,
         email: billingDetails.email,
@@ -69,7 +73,7 @@ function CheckoutPage() {
         handler: async (paymentResponse) => {
           try {
             // Verify payment and update booking
-            const verifyResponse = await axios.post("http://localhost:5000/api/bookings/verify", {
+            const verifyResponse = await axios.post("https://waterpark-be.onrender.com/api/bookings/verify", {
               razorpayOrderId: order_id,
               razorpayPaymentId: paymentResponse.razorpay_payment_id,
               razorpaySignature: paymentResponse.razorpay_signature,
@@ -139,7 +143,7 @@ function CheckoutPage() {
                     value={billingDetails[field]}
                     onChange={handleInputChange}
                     className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-200"
-                    required
+                    required={true}
                   />
                 </div>
               ))}

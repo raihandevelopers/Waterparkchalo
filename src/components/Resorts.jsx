@@ -15,6 +15,7 @@ const Resorts = () => {
   const [date, setDate] = useState("");
   const navigate = useNavigate();
   const [minDate, setMinDate] = useState("");
+  const [faqIndex, setFaqIndex] = useState(null);
 
   const Navlocation = useLocation();
   const { resort } = Navlocation.state || {};
@@ -41,43 +42,6 @@ const Resorts = () => {
     setMinDate(today);
   }, []);
 
-  const handleSubmit = (e) => {
-
-    e.preventDefault();
-
-    console.log(fname, pnum, email, password, adult, child, date);
-    fetch("https://iic-backend-r3jg.onrender.com/register", {
-      method: "POST",
-      crossDomain: true,
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-      body: JSON.stringify({
-        fname,
-        email,
-        pnum,
-        adult,
-        child,
-        date,
-        password,
-
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data, "userRegister");
-        if (data.status === "ok") {
-          alert("Registration Successful");
-          setTimeout(() => {
-            navigate('/sign-in');
-          }, 500);
-        } else {
-          alert("Something went wrong");
-        }
-      });
-  };
 
   const [adultCount, setAdultCount] = useState(1);
   const [childCount, setChildCount] = useState(0);
@@ -149,38 +113,15 @@ const Resorts = () => {
   };
   const [activeTab, setActiveTab] = useState('Description');
 
-  const attractions = [
-    'Biggest Wave Pool',
-    '4 Big Swimming Pool',
-    '12+ Water Slides',
-    'Jungle theme',
-    'Tornado Slide',
-    '2 Rain Dance',
-    'D.J. Music',
-    'Tube Slide',
-  ];
-  const tripinfo = [
-    '9 Am to 5 Pm',
-    'Virar, Maharashtra',
-    'Meals',
-    'Veg / Non-veg',
-    'Parking',
-    'Available Rooms',
-    'Free Cancellation(One Day Prior)'
-  ];
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      goToNext();
+    }, 2500); // 2500ms = 2.5 seconds
 
-  const cost = [
-    ' Cost Includes',
-    ' Morning Breakfast',
-    'Lunch Veg/Non-Veg',
-    'Evening Hie Tea'
-  ];
-
-  const FAQ = [
-  ];
-
-
+    // Clear interval on component unmount
+    return () => clearInterval(interval);
+  }, [currentIndex]); // Re-run the effect if currentIndex changes
 
   const handleCheckout = () => {
     const data = {
@@ -289,19 +230,36 @@ const Resorts = () => {
 
         {/* FAQ Tab */}
         {activeTab === 'FAQ' && (
-          <div className="attractions-list">
+          <div className="faq-list space-y-4">
             {resort?.faqs?.length > 0 ? (
               resort.faqs.map((faq, index) => (
-                <div key={index} className="attraction-item">
-                  <span className="checkmark">❓</span> {faq.question}
-                  <p>{faq.answer}</p>
+                <div
+                  key={index}
+                  className="faq-item border border-gray-200 rounded-lg p-4 shadow-sm bg-white"
+                >
+                  <div className="flex justify-between items-center cursor-pointer"
+                    onClick={() => setFaqIndex(faqIndex === index ? null : index)}>
+                    <span className="font-medium text-gray-800 flex gap-2">
+                      {faq.question}
+                    </span>
+                    <span
+                      className={`transition-transform ${faqIndex === index ? 'rotate-180' : ''
+                        }`}
+                    >
+                      ▼
+                    </span>
+                  </div>
+                  {faqIndex === index && (
+                    <p className="mt-2 text-gray-600">{faq.answer}</p>
+                  )}
                 </div>
               ))
             ) : (
-              <p>No FAQs available.</p>
+              <p className="text-gray-600">No FAQs available.</p>
             )}
           </div>
         )}
+
 
         {/* Map Tab */}
         {activeTab === 'Map' && (
@@ -310,12 +268,10 @@ const Resorts = () => {
               <div>
                 <iframe
                   src={resort.map}
-                  title="Map Location"
-                  width="100%"
-                  height="400"
-                  style={{ border: 0 }}
+                  className=" w-full h-[200px] lg:h-[400px]"
                   allowFullScreen=""
                   loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
                 ></iframe>
               </div>
             ) : (

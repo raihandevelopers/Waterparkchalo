@@ -534,8 +534,8 @@ background-color: #fff;
 
 .homeinfo{
   display: flex;
-  justify-content: start;
-  align-items: start;
+  justify-content: flex-start;
+  align-items: flex-start;
   flex-direction: column;
   font-size: 30px;
 
@@ -561,12 +561,18 @@ background-color: #fff;
   
  
 }
-
 .carousel-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: 10px; /* Optional, if you want rounded corners for the image */
+}
+.carousel-image {
+  width: 100%;
+  height: 400px; /* Fixed height for stable space */
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px; /* Optional, if you want rounded corners */
 }
 
 .carousel-button {

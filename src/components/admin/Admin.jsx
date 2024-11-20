@@ -66,7 +66,7 @@ function AdminLayout() {
 
       {/* Mobile Navigation */}
       <header className="md:hidden bg-indigo-700 text-white p-4 flex justify-between items-center">
-        <h1 className="text-2xl font-bold">Admin Panel</h1>
+        <h1 className="text-2xl font-bold text-white">Admin Panel</h1>
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           className="focus:outline-none"

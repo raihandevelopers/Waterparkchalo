@@ -19,7 +19,7 @@
   import GetBookings from './components/admin/GetBookings.jsx';
   import EditWaterparkList from './components/admin/EditWaterparkList.jsx'
   import EditWaterpark from './components/admin/EditWaterpark.jsx'
-
+  import WaterparkTicket from './components/Ticket.jsx'
   
   const user = JSON.parse(localStorage.getItem("user"));
 
@@ -42,6 +42,7 @@
 
           <Route path='/sign-in' element={<Login />} />
           <Route path='/UserDetails' element={<UserDetails />} />
+          <Route path='/ticket' element={<WaterparkTicket />} />
         </Route>
 
         {isAdmin && (
