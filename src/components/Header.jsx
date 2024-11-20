@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLogin, setIsLogin] = useState(localStorage.getItem("isLoggedIn"));
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -92,7 +93,7 @@ const Header = () => {
           </NavLink>
         </div>
         <div className="logsvg">
-          <NavLink to="/sign-in" className="nav-link">
+          <NavLink to={isLogin == "true"? '/UserDetails':'/sign-in'} className="nav-link">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 448 512"

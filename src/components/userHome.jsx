@@ -1,32 +1,11 @@
 import { Button, Link, Stack, Typography } from "@mui/material";
-import React from "react";
+import React,{useEffect} from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { WrapText } from "@mui/icons-material";
 
 
 
 export default function UserHome({ userData }) {
-
-  var lin;
-  var data = ` 
-adityakumar098k@gmail.com
- `;
-
-
-
-
-var bol = 0;
-
-var h = userData.email;
-console.log(h);
-var arrobj = [];
-var lines = data.split("\n");
-var headers = lines[0].split(",");
-
-
-
-
-
   const logOut = () => {
     window.localStorage.clear();
     window.location.href = "./sign-in";
@@ -131,7 +110,7 @@ var headers = lines[0].split(",");
                 variant="h6"
                 sx={{ fontSize: { xs: "1.25rem", md: "1.5rem" } }}
               >
-                Name : {userData.fname}
+                Name : {userData.name}
               </Typography>
               <Typography
                 variant="body1"
@@ -143,7 +122,7 @@ var headers = lines[0].split(",");
                 variant="body1"
                 sx={{ fontSize: { xs: "1rem", md: "1.25rem" } }}
               >
-                Phone number : {userData.pnum}
+                Phone number : {userData.mobile}
               </Typography>
               
             </Stack>

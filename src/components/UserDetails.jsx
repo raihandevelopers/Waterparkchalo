@@ -2,7 +2,28 @@ import React, { useEffect, useState } from "react";
 import UserHome from "./userHome";
 
 export default function UserDetails() {
-    const [userData, setUserData] = useState("");
+    const [userData, setUserData] = useState({
+        email: "",
+        name: "",
+        mobile: "",
+    });
+
+    useEffect(() => {
+        const storedUser = localStorage.getItem("user");
+        console.log(storedUser, "storedUser");
+        if (storedUser) {
+            try {
+                const parsedUser = JSON.parse(storedUser);
+                setUserData({
+                    email: parsedUser.email || "",
+                    name: parsedUser.name || "",
+                    mobile: parsedUser.mobile || "",
+                });
+            } catch (error) {
+                console.error("Error parsing user data from localStorage:", error);
+            }
+        }
+    }, []);
 
 
     // useEffect(() => {

@@ -184,10 +184,10 @@ const Resorts = () => {
 
   const handleCheckout = () => {
     const data = {
-      adultCount: adultCount, 
+      adultCount: adultCount,
       childCount: childCount,
-      date:selectedDate,
-      resortName: resort.name, 
+      date: selectedDate,
+      resortName: resort.name,
       subtotal: subtotal,
       deposit: dtotal,
       resortId: resort._id,
@@ -197,7 +197,7 @@ const Resorts = () => {
   };
 
   return (
-    <div style={{ overflowx: 'hidden'}}>
+    <div style={{ overflowx: 'hidden' }}>
       <div className="carousel-card">
         <button className="carousel-button left" onClick={goToPrevious}>
           &#10094;
@@ -223,107 +223,107 @@ const Resorts = () => {
       </div>
 
       <div className="container">
-  <h1 className="resort-title">{resort?.name}</h1>
-  <p className="resort-location">{resort?.location}</p>
+        <h1 className="resort-title">{resort?.name}</h1>
+        <p className="resort-location">{resort?.location}</p>
 
-  <div className="tabs">
-    {['Description', 'Included/Excluded', 'Reviews', 'FAQ', 'Map'].map((tab) => (
-      <button
-        key={tab}
-        className={`tab-button ${activeTab === tab ? 'active' : ''}`}
-        onClick={() => setActiveTab(tab)}
-      >
-        {tab}
-      </button>
-    ))}
-  </div>
-
-  {/* Description Tab */}
-  {activeTab === 'Description' && (
-    <div className="attractions-list2">
-      <p className="w-full">{resort?.description}</p>
-      <p>
-        <strong>Price:</strong> ₹{resort?.price}
-      </p>
-      <p>
-        <strong>Discounted Price:</strong> ₹{resort?.discountPrice}
-      </p>
-      <p>
-        <strong>Advance Amount:</strong> ₹{resort?.advanceAmount}
-      </p>
-      <p>
-        <strong>Weekend Price Increase:</strong> {resort?.weekendPriceIncrease}%
-      </p>
-    </div>
-  )}
-
-  {/* Included/Excluded Tab */}
-  {activeTab === 'Included/Excluded' && (
-    <div className="attractions-list">
-      <div>
-        <h2>Included:</h2>
-        {resort?.included?.length > 0 ? (
-          resort.included.map((item, index) => (
-            <div key={index} className="attraction-item">
-              <span className="checkmark">✔️</span> {item}
-            </div>
-          ))
-        ) : (
-          <p>No included items listed.</p>
-        )}
-      </div>
-      <div>
-        <h2>Excluded:</h2>
-        {resort?.excluded?.length > 0 ? (
-          resort.excluded.map((item, index) => (
-            <div key={index} className="attraction-item">
-              <span className="checkmark">❌</span> {item}
-            </div>
-          ))
-        ) : (
-          <p>No excluded items listed.</p>
-        )}
-      </div>
-    </div>
-  )}
-
-  {/* FAQ Tab */}
-  {activeTab === 'FAQ' && (
-    <div className="attractions-list">
-      {resort?.faqs?.length > 0 ? (
-        resort.faqs.map((faq, index) => (
-          <div key={index} className="attraction-item">
-            <span className="checkmark">❓</span> {faq.question}
-            <p>{faq.answer}</p>
-          </div>
-        ))
-      ) : (
-        <p>No FAQs available.</p>
-      )}
-    </div>
-  )}
-
-  {/* Map Tab */}
-  {activeTab === 'Map' && (
-    <div className="attractions-list">
-      {resort?.map ? (
-        <div>
-          <iframe
-            src={resort.map}
-            title="Map Location"
-            width="100%"
-            height="400"
-            style={{ border: 0 }}
-            allowFullScreen=""
-            loading="lazy"
-          ></iframe>
+        <div className="tabs">
+          {['Description', 'Included/Excluded', 'Reviews', 'FAQ', 'Map'].map((tab) => (
+            <button
+              key={tab}
+              className={`tab-button ${activeTab === tab ? 'active' : ''}`}
+              onClick={() => setActiveTab(tab)}
+            >
+              {tab}
+            </button>
+          ))}
         </div>
-      ) : (
-        <p>No map location available.</p>
-      )}
-    </div>
-  )}
-</div>
+
+        {/* Description Tab */}
+        {activeTab === 'Description' && (
+          <div className="attractions-list2">
+            <p className="w-full">{resort?.description}</p>
+            <p>
+              <strong>Price:</strong> ₹{resort?.price}
+            </p>
+            <p>
+              <strong>Discounted Price:</strong> ₹{resort?.discountPrice}
+            </p>
+            <p>
+              <strong>Advance Amount:</strong> ₹{resort?.advanceAmount}
+            </p>
+            <p>
+              <strong>Weekend Price Increase:</strong> {resort?.weekendPriceIncrease}%
+            </p>
+          </div>
+        )}
+
+        {/* Included/Excluded Tab */}
+        {activeTab === 'Included/Excluded' && (
+          <div className="attractions-list">
+            <div>
+              <h2>Included:</h2>
+              {resort?.included?.length > 0 ? (
+                resort.included.map((item, index) => (
+                  <div key={index} className="attraction-item">
+                    <span className="checkmark">✔️</span> {item}
+                  </div>
+                ))
+              ) : (
+                <p>No included items listed.</p>
+              )}
+            </div>
+            <div>
+              <h2>Excluded:</h2>
+              {resort?.excluded?.length > 0 ? (
+                resort.excluded.map((item, index) => (
+                  <div key={index} className="attraction-item">
+                    <span className="checkmark">❌</span> {item}
+                  </div>
+                ))
+              ) : (
+                <p>No excluded items listed.</p>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* FAQ Tab */}
+        {activeTab === 'FAQ' && (
+          <div className="attractions-list">
+            {resort?.faqs?.length > 0 ? (
+              resort.faqs.map((faq, index) => (
+                <div key={index} className="attraction-item">
+                  <span className="checkmark">❓</span> {faq.question}
+                  <p>{faq.answer}</p>
+                </div>
+              ))
+            ) : (
+              <p>No FAQs available.</p>
+            )}
+          </div>
+        )}
+
+        {/* Map Tab */}
+        {activeTab === 'Map' && (
+          <div className="attractions-list">
+            {resort?.map ? (
+              <div>
+                <iframe
+                  src={resort.map}
+                  title="Map Location"
+                  width="100%"
+                  height="400"
+                  style={{ border: 0 }}
+                  allowFullScreen=""
+                  loading="lazy"
+                ></iframe>
+              </div>
+            ) : (
+              <p>No map location available.</p>
+            )}
+          </div>
+        )}
+      </div>
 
       <div className="booking-container py-3">
         <h2>Select Booking Date</h2>

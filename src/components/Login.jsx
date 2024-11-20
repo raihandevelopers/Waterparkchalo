@@ -17,6 +17,7 @@ export default function AuthPage() {
       password: "",
       confirmPassword: "",
       name: "",
+      mobile:"",
     });
   };
 
@@ -34,16 +35,15 @@ export default function AuthPage() {
     // Prepare data for submission
     const requestData = tabIndex === 0 ? 
       { email: formData.email, password: formData.password } :
-      { name: formData.name, email: formData.email, password: formData.password };
+      { name: formData.name, email: formData.email, password: formData.password,mobile:formData.mobile };
 
     try {
       const response = await axios.post(apiUrl, requestData);
       console.log("API response:", response.data); 
       if (response.data) {
         // Store necessary data in localStorage (e.g., token and user info)
-        localStorage.setItem("userToken", response.data.token);
         localStorage.setItem("user", JSON.stringify(response.data.user));
-
+        localStorage.setItem("isLoggedIn", true);
         // Redirect user to dashboard or home page after successful login/signup
         window.location.href = "/"; // Change this to your desired redirect path
       } else {
@@ -106,6 +106,27 @@ export default function AuthPage() {
                   onChange={handleInputChange}
                   className="block w-full pl-10 py-2 border rounded-lg shadow-sm focus:ring-teal-500 focus:border-teal-500"
                   placeholder="Enter your full name"
+                  required
+                />
+              </div>
+            </div>
+          )}
+          {tabIndex === 1 && (
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Mobile Number
+              </label>
+              <div className="relative">
+                <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-teal-500">
+                  <i className="fas fa-user"></i>
+                </span>
+                <input
+                  type="text"
+                  name="mobile"
+                  value={formData.mobile}
+                  onChange={handleInputChange}
+                  className="block w-full pl-10 py-2 border rounded-lg shadow-sm focus:ring-teal-500 focus:border-teal-500"
+                  placeholder="Enter your Mobile Number"
                   required
                 />
               </div>
