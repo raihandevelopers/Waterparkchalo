@@ -29,7 +29,14 @@ const WaterParks = () => {
     fetchWaterparks();
   }, []);
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
+    <>
+      <img
+        src="whatsapp.png"
+        alt="WhatsApp Logo"
+        className="w-24 h-24 fixed z-[10] top-[75vh] cursor-pointer"
+        onClick={() => window.open("https://wa.me/918847714464", "_blank")}
+      />
+    <div className="min-h-screen bg-gray-100 p-6 my-12">
       {/* Page Heading */}
       <h1 className="text-3xl font-bold text-center mb-8 mt-6">Water Parks</h1>
 
@@ -78,6 +85,7 @@ const WaterParks = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 export default WaterParks;

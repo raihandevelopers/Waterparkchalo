@@ -2,6 +2,13 @@ import React from 'react';
 
 const TermsAndConditions = () => {
   return (
+    <>
+              <img
+        src="whatsapp.png"
+        alt="WhatsApp Logo"
+        className="w-24 h-24 fixed z-[10] top-[75vh] cursor-pointer"
+        onClick={() => window.open("https://wa.me/918847714464", "_blank")}
+      />
     <div className="mt-32 mx-auto py-4 md:px-24 px-12">
       <h1 className="text-4xl font-bold text-center mb-6 text-black">Terms and Conditions</h1>
       
@@ -84,6 +91,7 @@ const TermsAndConditions = () => {
         <p>By using Waterpark Chalo’s services and website, you acknowledge that you have read, understood, and agreed to these terms and conditions. If you do not agree with any part of these terms, you must refrain from using our services.</p>
       </footer>
     </div>
+    </>
   );
 };
 

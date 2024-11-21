@@ -34,7 +34,14 @@ const Influencers = () => {
   };
 
   return (
-    <div className="p-4 bg-gray-100 mt-24">
+    <>
+          <img
+        src="whatsapp.png"
+        alt="WhatsApp Logo"
+        className="w-24 h-24 fixed z-[10] top-[75vh] cursor-pointer"
+        onClick={() => window.open("https://wa.me/918847714464", "_blank")}
+      />
+    <div className="p-4 bg-gray-100 my-24">
       <h1 className="text-2xl font-bold text-center mb-6">Gallery</h1>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {images.map((image, index) => (
@@ -75,6 +82,8 @@ const Influencers = () => {
         </div>
       )}
     </div>
+    </>
+
   );
 };
 

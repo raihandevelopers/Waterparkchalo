@@ -4,6 +4,7 @@ import { Stack, Button, Typography, TextField, } from '@mui/material';
 import { NavLink, useNavigate } from 'react-router-dom';
 
 import { useLocation } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Resorts = () => {
   const [fname, setFname] = useState("");
@@ -124,13 +125,17 @@ const Resorts = () => {
   }, [currentIndex]); // Re-run the effect if currentIndex changes
 
   const handleCheckout = () => {
+    if(!date){
+      toast.error('Please select a date');
+      return;
+    }
     const data = {
       adultCount: adultCount,
       childCount: childCount,
       date: date,
       resortName: resort.name,
       subtotal: subtotal,
-      deposit: dtotal,
+      deposit: pickup ? dtotal + 50 : dtotal,
       resortId: resort._id,
     };
 
@@ -138,6 +143,12 @@ const Resorts = () => {
   };
 
   return (
+    <>      <img
+    src="whatsapp.png"
+    alt="WhatsApp Logo"
+    className="w-24 h-24 fixed z-[10] top-[75vh] cursor-pointer"
+    onClick={() => window.open("https://wa.me/918847714464", "_blank")}
+  />
     <div style={{ overflowx: 'hidden' }}>
       <div className="carousel-card">
         <button className="carousel-button left" onClick={goToPrevious}>
@@ -301,15 +312,25 @@ const Resorts = () => {
 
         <div className="flex flex-col items-center space-y-4">
           <label htmlFor="date" className="text-sm text-gray-700">Select Date:</label>
-          <input
-            id="date"
-            type="date"
-            value={date}
-            min={minDate}
-            onChange={(e) => setDate(e.target.value)}
-            className="w-full max-w-xs p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+          <div className="relative w-full max-w-xs">
+            <input
+              id="date"
+              type="date"
+              value={date}
+              min={minDate}
+              onChange={(e) => setDate(e.target.value)}
+              className={`w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${!date ? 'text-gray-400' : 'text-black'
+                }`}
+            />
+            {!date && (
+              <span className="absolute inset-y-0 left-3 flex items-center text-gray-400 pointer-events-none sm:hidden">
+                dd/mm/yyyy
+              </span>
+            )}
+          </div>
         </div>
+
+
 
         <div className="ticket-selector">
           <div className="ticket">
@@ -495,6 +516,7 @@ const Resorts = () => {
 
 
     </div>
+    </>
   );
 };
 

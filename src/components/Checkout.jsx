@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function CheckoutPage() {
   const location = useLocation();
@@ -41,7 +42,7 @@ function CheckoutPage() {
   const handlePayment = async (e) => {
     e.preventDefault();
     if (billingDetails.email === "" || billingDetails.firstName === "" || billingDetails.lastName === "" || billingDetails.phone === "" || billingDetails.city === "") {
-      alert("Please fill all the details");
+      toast.error("Please fill all the details");
       return;
     }
     try {
@@ -63,7 +64,7 @@ function CheckoutPage() {
 
       if (!success) {
         console.error("Error:", message);
-        alert("Failed to create booking. Please try again.");
+        toast.error("Failed to create booking. Please try again.");
         return;
       }
       if (paymentMethod === "cash") {
@@ -97,14 +98,14 @@ function CheckoutPage() {
             const { success: verifySuccess, booking: updatedBooking, message: verifyMessage } = verifyResponse.data;
 
             if (verifySuccess && updatedBooking.paymentStatus === "Completed") {
-              alert("Payment Successful! Booking confirmed.");
+              toast.success("Payment Successful! Booking confirmed.");
             } else {
               console.error("Payment verification failed:", verifyMessage);
-              alert("Payment verification failed. Please contact support.");
+              toast.error("Payment verification failed. Please contact support.");
             }
           } catch (error) {
             console.error("Error verifying payment:", error);
-            alert("Payment verification failed!");
+            toast.error("Payment verification failed!");
           }
         },
         prefill: {
@@ -120,19 +121,20 @@ function CheckoutPage() {
       razorpay.open();
     } catch (error) {
       console.error("Error initiating payment:", error);
-      alert("Payment initiation failed. Please try again.");
+      toast.error("Payment initiation failed. Please try again.");
     }
   };
   return (
+    <>
+          <img
+        src="whatsapp.png"
+        alt="WhatsApp Logo"
+        className="w-24 h-24 fixed z-[10] top-[75vh] cursor-pointer"
+        onClick={() => window.open("https://wa.me/918847714464", "_blank")}
+      />
     <div className="bg-gray-100 min-h-screen flex items-center justify-center py-10 px-4 my-10">
       <div className="bg-white rounded-lg shadow-lg max-w-4xl w-full p-8">
         <h1 className="text-3xl font-bold text-gray-800 text-center mb-6">Checkout</h1>
-        <p className="text-center text-gray-600 mb-8">
-          Returning customer?{" "}
-          <a href="/login" className="text-blue-500 hover:underline">
-            Click here to login
-          </a>
-        </p>
 
         <form  className="space-y-8">
           {/* Billing Details Section */}
@@ -161,19 +163,6 @@ function CheckoutPage() {
                   />
                 </div>
               ))}
-            </div>
-            <div className="flex items-center mt-4">
-              <input
-                id="createAccount"
-                type="checkbox"
-                name="createAccount"
-                checked={billingDetails.createAccount}
-                onChange={handleInputChange}
-                className="w-5 h-5 border border-gray-300 rounded-md text-blue-600 focus:ring focus:ring-blue-200"
-              />
-              <label htmlFor="createAccount" className="ml-2 text-gray-700">
-                Create an account?
-              </label>
             </div>
           </div>
 
@@ -261,6 +250,7 @@ function CheckoutPage() {
         </form>
       </div>
     </div>
+    </>
   );
 }
 

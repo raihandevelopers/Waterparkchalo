@@ -2,6 +2,13 @@ import React from 'react';
 
 const RefundsAndCancellations = () => {
   return (
+    <>
+          <img
+        src="whatsapp.png"
+        alt="WhatsApp Logo"
+        className="w-24 h-24 fixed z-[10] top-[75vh] cursor-pointer"
+        onClick={() => window.open("https://wa.me/918847714464", "_blank")}
+      />
     <div className="mt-32 mx-auto py-4 md:px-24 px-12">
       <h1 className="text-3xl font-bold mb-6 text-black">Refunds and Cancellations Policy</h1>
       <p className="mb-4">This Refunds and Cancellations Policy outlines the procedures and guidelines for refunds and cancellations of bookings made through Waterpark Chalo. By using our services and making bookings on the Website, you agree to comply with the following policy:</p>
@@ -60,6 +67,8 @@ const RefundsAndCancellations = () => {
 
       <p className="mt-4">By using Waterpark Chalo’s services and making bookings on the Website, you acknowledge that you have read, understood, and agreed to this Refunds and Cancellations Policy. If you do not agree with any part of this policy, you must refrain from using our services.</p>
     </div>
+    </>
+
   );
 };
 

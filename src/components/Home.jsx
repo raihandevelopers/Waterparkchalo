@@ -113,7 +113,7 @@ const Home = () => {
         <div
           className={`carousel-image ${isAnimating ? "animate-slide" : ""}`}
         >
-          <img src={images[currentIndex]} alt={`Slide ${currentIndex}`} />
+          <img src={images[currentIndex]} alt={`Slide ${currentIndex}`}  />
         </div>
 
         <button className="carousel-button right" onClick={goToNext}>

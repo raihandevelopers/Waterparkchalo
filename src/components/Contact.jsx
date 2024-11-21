@@ -2,6 +2,13 @@ import React from "react";
 
 function ContactPage() {
   return (
+    <>
+          <img
+        src="whatsapp.png"
+        alt="WhatsApp Logo"
+        className="w-24 h-24 fixed z-[10] top-[75vh] cursor-pointer"
+        onClick={() => window.open("https://wa.me/918847714464", "_blank")}
+      />
     <div className="bg-gray-100 mt-24">
       {/* Hero Section */}
       <div className="relative bg-cover bg-center h-64 flex items-center justify-center">
@@ -124,6 +131,8 @@ function ContactPage() {
         ></iframe>
       </div>
     </div>
+    </>
+
   );
 }
 export default ContactPage;

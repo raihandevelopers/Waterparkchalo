@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios"; // Import axios for API requests
+import { toast } from "react-toastify";
 
 export default function AuthPage() {
   const [tabIndex, setTabIndex] = useState(0); // 0 = Login, 1 = Signup
@@ -45,18 +46,26 @@ export default function AuthPage() {
         localStorage.setItem("user", JSON.stringify(response.data.user));
         localStorage.setItem("isLoggedIn", true);
         // Redirect user to dashboard or home page after successful login/signup
+        toast.success(tabIndex===0? "Login successful!":"Signup successful!");
         window.location.href = "/"; // Change this to your desired redirect path
       } else {
         // Handle failure (e.g., invalid credentials or validation errors)
-        alert(response.data.message || "Something went wrong!");
+        toast.error(response.data.message || "Something went wrong!");
       }
     } catch (error) {
       console.error("Error submitting form:", error);
-      alert("An error occurred. Please try again.");
+      toast.error("An error occurred. Please try again.");
     }
   };
 
   return (
+    <>
+          <img
+        src="whatsapp.png"
+        alt="WhatsApp Logo"
+        className="w-24 h-24 fixed z-[10] top-[75vh] cursor-pointer"
+        onClick={() => window.open("https://wa.me/918847714464", "_blank")}
+      />
     <div className={`flex min-h-screen items-center justify-center bg-white ${tabIndex === 0 ? "" : "pt-32"}`}>
       <div className="w-full max-w-lg bg-white rounded-lg shadow-lg p-6">
         {/* Header */}
@@ -210,5 +219,6 @@ export default function AuthPage() {
         )}
       </div>
     </div>
+    </>
   );
 }

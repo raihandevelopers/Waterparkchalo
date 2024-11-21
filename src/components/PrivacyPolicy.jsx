@@ -2,6 +2,13 @@ import React from 'react';
 
 const PrivacyPolicy = () => {
   return (
+    <>
+          <img
+        src="whatsapp.png"
+        alt="WhatsApp Logo"
+        className="w-24 h-24 fixed z-[10] top-[75vh] cursor-pointer"
+        onClick={() => window.open("https://wa.me/918847714464", "_blank")}
+      />
     <div className="mt-32 mx-auto py-6 md:px-24 px-12">
       <h1 className="text-4xl font-bold text-center mb-6 text-black">Privacy Policy</h1>
       <p className="mb-4 text-lg text-gray-700">
@@ -97,6 +104,7 @@ const PrivacyPolicy = () => {
         <p>This Privacy Policy was last updated on <strong>31 December 2023</strong>.</p>
       </footer>
     </div>
+    </>
   );
 };
 
