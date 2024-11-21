@@ -9,7 +9,7 @@ const GetBookings = () => {
   useEffect(() => {
     // Fetch bookings from the backend
     axios
-      .get(`https://waterpark-be.onrender.com/api/bookings/all`)
+      .get(`http://localhost:5000/api/bookings/all`)
       .then((response) => {
         console.log("Bookings fetched:", response.data);
         setBookings(response.data); // Set the bookings data to state

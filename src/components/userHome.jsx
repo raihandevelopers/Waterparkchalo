@@ -1,11 +1,31 @@
 import { Button, Link, Stack, Typography } from "@mui/material";
-import React,{useEffect} from "react";
+import React,{useEffect,useState} from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { WrapText } from "@mui/icons-material";
 
+export default function UserHome() {
+  const [userData, setUserData] = useState({
+    email: "",
+    name: "",
+    mobile: "",
+});
 
+useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    console.log(storedUser, "storedUser");
+    if (storedUser) {
+        try {
+            const parsedUser = JSON.parse(storedUser);
+            setUserData({
+                email: parsedUser.email || "",
+                name: parsedUser.name || "",
+                mobile: parsedUser.mobile || "",
+            });
+        } catch (error) {
+            console.error("Error parsing user data from localStorage:", error);
+        }
+    }
+}, []);
 
-export default function UserHome({ userData }) {
   const logOut = () => {
     window.localStorage.clear();
     window.location.href = "./sign-in";

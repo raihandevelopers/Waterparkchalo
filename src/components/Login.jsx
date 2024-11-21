@@ -28,7 +28,7 @@ export default function AuthPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const apiUrl = `https://waterpark-be.onrender.com/api/auth/${
+    const apiUrl = `http://localhost:5000/api/auth/${
       tabIndex === 0 ? "login" : "signup"
     }`;
 
@@ -57,7 +57,7 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-white">
+    <div className={`flex min-h-screen items-center justify-center bg-white ${tabIndex === 0 ? "" : "pt-32"}`}>
       <div className="w-full max-w-lg bg-white rounded-lg shadow-lg p-6">
         {/* Header */}
         <div className="text-center mb-4">
@@ -96,9 +96,6 @@ export default function AuthPage() {
                 Full Name
               </label>
               <div className="relative">
-                <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-teal-500">
-                  <i className="fas fa-user"></i>
-                </span>
                 <input
                   type="text"
                   name="name"
@@ -117,9 +114,6 @@ export default function AuthPage() {
                 Mobile Number
               </label>
               <div className="relative">
-                <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-teal-500">
-                  <i className="fas fa-user"></i>
-                </span>
                 <input
                   type="text"
                   name="mobile"
@@ -139,9 +133,6 @@ export default function AuthPage() {
               Email Address
             </label>
             <div className="relative">
-              <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-teal-500">
-                <i className="fas fa-envelope"></i>
-              </span>
               <input
                 type="email"
                 name="email"
@@ -160,9 +151,6 @@ export default function AuthPage() {
               Password
             </label>
             <div className="relative">
-              <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-teal-500">
-                <i className="fas fa-lock"></i>
-              </span>
               <input
                 type="password"
                 name="password"
@@ -182,9 +170,6 @@ export default function AuthPage() {
                 Confirm Password
               </label>
               <div className="relative">
-                <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-teal-500">
-                  <i className="fas fa-lock"></i>
-                </span>
                 <input
                   type="password"
                   name="confirmPassword"
@@ -209,14 +194,17 @@ export default function AuthPage() {
 
         {/* Terms and Conditions (Sign Up only) */}
         {tabIndex === 1 && (
-          <p className="mt-4 text-sm text-center text-gray-500">
+          <p className="mt-4 text-sm text-center text-gray-500 mb-24">
             By signing up, you agree to our{" "}
-            <a href="/terms" className="text-teal-500 underline">
+            <a href="/terms-and-conditions" className="text-teal-500 underline">
               Terms & Conditions
             </a>{" "}
-            and{" "}
-            <a href="/privacy" className="text-teal-500 underline">
+            ,{" "}
+            <a href="/privacy-policy" className="text-teal-500 underline">
               Privacy Policy
+            </a> and {' '}
+            <a href="/refund" className="text-teal-500 underline">
+              Refund and Cancellations
             </a>.
           </p>
         )}

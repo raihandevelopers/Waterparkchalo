@@ -5,9 +5,11 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  
-}
 
+}
+body{
+  overflow-x: hidden;
+}
 
 
 .App {
@@ -120,8 +122,8 @@ h1 {
   z-index: 99;
 }
 .fbr img{
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   border-radius: 50px;
 }
 
@@ -265,9 +267,11 @@ flex: 1;
   height: 70px;
   background-color: #234778;
   color: white;
-
-  padding: 10px;
+  padding: 10px 20px;
   z-index: 999999;
+  display: flex; /* Enables Flexbox layout */
+  justify-content: space-between; /* Space between left and right sections */
+  align-items: center; /* Vertically aligns content */
 
 }
 .csl-image img {
@@ -457,12 +461,11 @@ flex: 1;
 
 .card-container {
   display: flex;
- 
   gap: 10px;
   padding: 16px;
   flex-wrap: wrap;
   justify-content: center;
-
+  margin-top: -200px;
 }
 
 .card {
@@ -482,7 +485,7 @@ background-color: #fff;
 .card-image {
   position: relative;
   width: 100%;
-  height: 150px;
+  height: 200px;
   overflow: hidden;
   border-radius: 8px;
 }
@@ -496,12 +499,12 @@ background-color: #fff;
 
 
 .card-content h3 {
-  margin: 8px 0;
+  margin: 4px 0;
   font-size: 18px;
 }
 
 .card-content p {
-  margin: 4px 0;
+  margin: 3px 0;
   color: #555;
 }
 
@@ -511,8 +514,8 @@ background-color: #fff;
 }
 
 .price {
-  padding-top: 40px;
-  margin-top: 80px;
+  padding-top: 20px;
+  margin-top: 40px;
   font-size: 16px;
   display: flex; /* Use flexbox */
   justify-content: space-between; /* Distribute space between elements */
@@ -552,15 +555,18 @@ background-color: #fff;
   align-items: flex-start;
   flex-direction: column;
   font-size: 30px;
-
+  padding-top: 30px;
 }
 .homeinfop{
   font-size: 25px;
  text-align: start;
  font-weight: 400;
    color: #fff;
+   background-color: #234778;
    padding: 30px;
    margin-bottom: -30px;
+   width: 100%;
+   height: 400px;
 }
 .carousel-card {
   position: relative;
@@ -677,6 +683,20 @@ background-color: #fff;
   background-color: #0156B3;
   border-radius: 5px;
   font-weight: bold;
+}
+.map-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 10px; /* Padding around the map */
+  box-sizing: border-box;
+}
+
+.map-frame {
+  width: 100%;
+  height: 100%;
+  border: 0; /* Remove iframe border */
+  border-radius: 8px; /* Optional: match the parent's border radius */
 }
 
 .attractions-list {
@@ -996,6 +1016,8 @@ z-index: 9999;
   flex-direction: row;
   flex-wrap: nowrap 5 ;
   padding: 5px;
+  margin-top: -240px;
+
 }
 
 .card{

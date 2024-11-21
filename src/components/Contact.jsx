@@ -2,7 +2,7 @@ import React from "react";
 
 function ContactPage() {
   return (
-    <div className="bg-gray-100 mt-9">
+    <div className="bg-gray-100 mt-24">
       {/* Hero Section */}
       <div className="relative bg-cover bg-center h-64 flex items-center justify-center">
         <img
@@ -21,7 +21,7 @@ function ContactPage() {
 
       {/* Contact Section */}
       <div className="container mx-auto px-8 py-16 max-w-[90%] lg:max-w-[1200px]">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Info */}
           <div className="bg-white p-8 shadow-lg rounded-lg">
             <h2 className="text-2xl font-semibold text-gray-800 mb-8">Our Contact Information</h2>
@@ -57,56 +57,55 @@ function ContactPage() {
               </div>
             </div>
           </div>
-
           {/* Contact Form */}
           <div className="bg-white p-8 shadow-lg rounded-lg">
             <h2 className="text-2xl font-semibold text-gray-800 mb-8">Send Us A Message</h2>
             <form>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
-  <div>
-    <label className="block text-gray-700 font-medium mb-2">First Name</label>
-    <input
-      type="text"
-      className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-300"
-      required
-    />
-  </div>
-  <div>
-    <label className="block text-gray-700 font-medium mb-2">Last Name</label>
-    <input
-      type="text"
-      className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-300"
-      required
-    />
-  </div>
-</div>
-<div className="mb-6">
-  <label className="block text-gray-700 font-medium mb-2">Email Address</label>
-  <input
-    type="email"
-    className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-300"
-    required
-  />
-</div>
-<div className="mb-6">
-  <label className="block text-gray-700 font-medium mb-2">Phone Number</label>
-  <input
-    type="text"
-    className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-300"
-    required
-  />
-</div>
-<div className="mb-6">
-  <label className="block text-gray-700 font-medium mb-2">Message</label>
-  <textarea
-    rows="4"
-    className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-300"
-    required
-  ></textarea>
-</div>
-<button className="w-full bg-[#234778] text-white py-3 rounded hover:bg-[#234778] transition">
-  Send Message
-</button>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+                <div>
+                  <label className="block text-gray-700 font-medium mb-2">First Name</label>
+                  <input
+                    type="text"
+                    className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-300"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-gray-700 font-medium mb-2">Last Name</label>
+                  <input
+                    type="text"
+                    className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-300"
+                    required
+                  />
+                </div>
+              </div>
+              <div className="mb-6">
+                <label className="block text-gray-700 font-medium mb-2">Email Address</label>
+                <input
+                  type="email"
+                  className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-300"
+                  required
+                />
+              </div>
+              <div className="mb-6">
+                <label className="block text-gray-700 font-medium mb-2">Phone Number</label>
+                <input
+                  type="text"
+                  className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-300"
+                  required
+                />
+              </div>
+              <div className="mb-6">
+                <label className="block text-gray-700 font-medium mb-2">Message</label>
+                <textarea
+                  rows="4"
+                  className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-300"
+                  required
+                ></textarea>
+              </div>
+              <button className="w-full bg-[#234778] text-white py-3 rounded hover:bg-[#234778] transition">
+                Send Message
+              </button>
             </form>
           </div>
         </div>
@@ -115,7 +114,7 @@ function ContactPage() {
       {/* Map Section */}
       <div className="w-full h-72 lg:h-96 mt-12">
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.222711034868!2d72.78578621490264!3d19.45539618687637!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7ae1d9219b9cf%3A0xc4e4db3bb688472d!2sVaity%20Aqua%20(Resort%20in%20Virar%20West)!5e0!3m2!1sen!2sin!4v1609439200013!5m2!1sen!2sin"
+          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d481664.6013077576!2d72.824089!3d19.412203000000005!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7a94882879413%3A0x780bb7d2f3a4f8ca!2sKailash%20Darshan%20-1!5e0!3m2!1sen!2sus!4v1732195989688!5m2!1sen!2sus"
           width="100%"
           height="100%"
           style={{ border: 0 }}
@@ -127,5 +126,4 @@ function ContactPage() {
     </div>
   );
 }
-
 export default ContactPage;

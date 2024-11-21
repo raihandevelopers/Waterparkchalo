@@ -268,7 +268,7 @@ const Resorts = () => {
               <div>
                 <iframe
                   src={resort.map}
-                  className=" w-full h-[200px] lg:h-[400px]"
+                  className=" w-200px h-[200px] lg:h-[400px] lg:w-[450px]"
                   allowFullScreen=""
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
@@ -299,12 +299,17 @@ const Resorts = () => {
         })}
       </div> */}
 
-        <input
-          type="date"
-          value={date}
-          min={minDate}
-          onChange={(e) => setDate(e.target.value)}
-        />
+        <div className="flex flex-col items-center space-y-4">
+          <label htmlFor="date" className="text-sm text-gray-700">Select Date:</label>
+          <input
+            id="date"
+            type="date"
+            value={date}
+            min={minDate}
+            onChange={(e) => setDate(e.target.value)}
+            className="w-full max-w-xs p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
 
         <div className="ticket-selector">
           <div className="ticket">

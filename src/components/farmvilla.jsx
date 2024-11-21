@@ -15,7 +15,7 @@ const WaterParks = () => {
     const fetchWaterparks = async () => {
       setLoading(true); 
       try {
-        const response = await axios.get(`https://waterpark-be.onrender.com/api/waterparks`);
+        const response = await axios.get(`http://localhost:5000/api/waterparks`);
         setParks(response.data.waterparks);
         console.log("Waterparks fetched:", response.data);
       } catch (error) {

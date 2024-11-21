@@ -12,7 +12,7 @@
   import Login from './components/Login'
   import CheckoutPage from './components/Checkout.jsx'
   import UserDetails from './components/UserDetails.jsx'
-
+  import PrivacyPolicy from './components/PrivacyPolicy.jsx'
 
   import AdminLayout from './components/admin/Admin.jsx'; // Admin Navigation Layout
   import AddWaterpark from './components/admin/AddWaterpark.jsx';
@@ -20,6 +20,9 @@
   import EditWaterparkList from './components/admin/EditWaterparkList.jsx'
   import EditWaterpark from './components/admin/EditWaterpark.jsx'
   import WaterparkTicket from './components/Ticket.jsx'
+import RefundsAndCancellations from './components/Refund.jsx'
+import TermsAndConditions from './components/TermsAndCond.jsx'
+import UserHome from './components/userHome.jsx'
   
   const user = JSON.parse(localStorage.getItem("user"));
 
@@ -41,8 +44,11 @@
           <Route path='checkout' element={<CheckoutPage />} />
 
           <Route path='/sign-in' element={<Login />} />
-          <Route path='/UserDetails' element={<UserDetails />} />
+          <Route path='/UserDetails' element={<UserHome />} />
           <Route path='/ticket' element={<WaterparkTicket />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/refund" element={<RefundsAndCancellations />} />
+          <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
         </Route>
 
         {isAdmin && (
