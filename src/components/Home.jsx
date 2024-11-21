@@ -70,7 +70,7 @@ const Home = () => {
     const fetchWaterparks = async () => {
       setLoading(true); // Set loading to true before API call
       try {
-        const response = await axios.get(`http://localhost:5000/api/waterparks`);
+        const response = await axios.get(`https://waterpark-be.onrender.com/api/waterparks`);
         setResorts(response.data.waterparks);
         console.log("Waterparks fetched:", response.data);
       } catch (error) {

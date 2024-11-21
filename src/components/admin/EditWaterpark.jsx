@@ -23,7 +23,7 @@ const EditWaterpark = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/waterparks/${id}`)
+      .get(`https://waterpark-be.onrender.com/api/waterparks/${id}`)
       .then((response) => {
         setFormData(response.data);
       })
@@ -48,7 +48,7 @@ const EditWaterpark = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .put(`http://localhost:5000/api/waterparks/${id}`, formData)
+      .put(`https://waterpark-be.onrender.com/api/waterparks/${id}`, formData)
       .then((response) => {
         if (response.status === 200) {
           navigate("/admin/edit-waterpark");

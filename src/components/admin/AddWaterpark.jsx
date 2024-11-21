@@ -69,7 +69,7 @@ function AddWaterpark() {
 
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/waterparks/add-waterpark`,
+        `https://waterpark-be.onrender.com/api/waterparks/add-waterpark`,
         data,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
