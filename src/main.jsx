@@ -17,6 +17,8 @@ import AdminLayout from './components/admin/Admin.jsx'; // Admin Navigation Layo
 import AddWaterpark from './components/admin/AddWaterpark.jsx';
 import GetBookings from './components/admin/GetBookings.jsx';
 import EditWaterparkList from './components/admin/EditWaterparkList.jsx'
+import AddEditPrivacyPolicy from './components/admin/AddEditPrivacyPolicy.jsx';
+import AddEditTermsConditions  from './components/admin/AddEditTermsConditions.jsx';
 import EditWaterpark from './components/admin/EditWaterpark.jsx'
 import WaterparkTicket from './components/Ticket.jsx'
 import RefundsAndCancellations from './components/Refund.jsx'
@@ -67,6 +69,8 @@ const router = createBrowserRouter(
           <Route path="edit-waterpark" element={<EditWaterparkList />} />
           <Route path="/admin/edit-waterpark/:id" element={<EditWaterpark />} />
           <Route path="get-bookings" element={<GetBookings />} />
+          <Route path="privacypolicy" element={<AddEditPrivacyPolicy  />} />
+          <Route path="termsconditions" element={<AddEditTermsConditions  />} />
         </Route>
       )}
     </>
