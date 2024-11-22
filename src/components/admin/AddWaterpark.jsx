@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 function AddWaterpark() {
   const [formData, setFormData] = useState({
@@ -9,8 +10,9 @@ function AddWaterpark() {
     included: "",
     excluded: "",
     map: "",
-    price: "",
-    discountPrice: "",
+    adultPrice: "",
+    childPrice: "",
+    discountPercentage: "",
     advanceAmount: "",
     weekendPriceIncrease: "",
   });
@@ -73,14 +75,15 @@ function AddWaterpark() {
         data,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
-      setMessage(response.data.message);
+      toast.success("Waterpark added successfully");
       setFormData({
         name: "",
         description: "",
         location: "",
         map: "",
-        price: "",
-        discountPrice: "",
+        adultPrice: "",
+        childPrice: "",
+        discountPercentage: "",
         advanceAmount: "",
         weekendPriceIncrease: "",
       });
@@ -90,7 +93,7 @@ function AddWaterpark() {
       setImages([]);
     } catch (error) {
       console.error(error);
-      setMessage("Failed to add waterpark");
+      toast.error("Failed to add waterpark");
     }
   };  useEffect(() => {
     console.log(images)
@@ -98,22 +101,15 @@ function AddWaterpark() {
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg">
       <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Add Waterpark</h2>
-      {message && (
-        <p
-          className={`text-center mb-4 ${message.includes("success") ? "text-green-500" : "text-red-500"
-            }`}
-        >
-          {message}
-        </p>
-      )}
       <form onSubmit={handleSubmit} className="space-y-4">
         {[
           { label: "Name", name: "name", type: "text" },
           { label: "Description", name: "description", type: "text" },
           { label: "Location", name: "location", type: "text" },
           { label: "Google Maps Link", name: "map", type: "text" },
-          { label: "Price", name: "price", type: "number" },
-          { label: "Discount Price", name: "discountPrice", type: "number" },
+          { label: "Adult Price", name: "adultPrice", type: "number" },
+          { label: "Child Price", name: "childPrice", type: "number" },
+          { label: "Discount Percentage", name: "discountPercentage", type: "number" },
           { label: "Advance Amount", name: "advanceAmount", type: "number" },
           {
             label: "Weekend Price Increase (%)",

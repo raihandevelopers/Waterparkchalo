@@ -24,10 +24,12 @@ const Card = ({ resort }) => {
         <p className="price">
           <div>
             <span className="current-price">
-              ₹{resort.price || resort.priceAdult || "N/A"}
+              ₹{resort.price || resort.adultPrice || "N/A"}
             </span>
-            {resort.discountPrice && (
-              <span className="original-price">₹{resort.discountPrice}</span>
+            {resort.discountPercentage > 0 && (
+              <span className="original-price">
+                ₹{(resort.adultPrice - (resort.adultPrice * resort.discountPercentage) / 100).toFixed(2)}
+              </span>
             )}
           </div>
           <button className="explore-button" onClick={handleBookClick}>
@@ -113,7 +115,7 @@ const Home = () => {
         <div
           className={`carousel-image ${isAnimating ? "animate-slide" : ""}`}
         >
-          <img src={images[currentIndex]} alt={`Slide ${currentIndex}`}  />
+          <img src={images[currentIndex]} alt={`Slide ${currentIndex}`} />
         </div>
 
         <button className="carousel-button right" onClick={goToNext}>
@@ -122,8 +124,8 @@ const Home = () => {
       </div>
 
       <div className="homeinfo">
-        <p className="homeinfop text-4xl"><b>Most Popular Tour</b>  <br/>
-        <p className='font-normal text-[15px]'>Your Ultimate Destination for Fun and Adventure!</p>
+        <p className="homeinfop text-4xl"><b>Most Popular Tour</b>  <br />
+          <p className='font-normal text-[15px]'>Your Ultimate Destination for Fun and Adventure!</p>
         </p>
       </div>
       {loading ? (
@@ -150,7 +152,7 @@ const Home = () => {
             <p>© 2024 Water park chalo</p>
           </div>
           <div className="fbr">
-          <a href="https://www.facebook.com/" className="text-sm hover:text-gray-300">
+            <a href="https://www.facebook.com/" className="text-sm hover:text-gray-300">
               <FontAwesomeIcon icon={faFacebook} size="xl" />
             </a>
             <a href="https://wa.me/9146869202" className="text-sm hover:text-gray-300">

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const EditWaterpark = () => {
   const { id } = useParams();
@@ -10,8 +11,9 @@ const EditWaterpark = () => {
     name: "",
     location: "",
     description: "",
-    price: "",
-    discountPrice: "",
+    adultPrice:0 ,
+    childPrice: 0,
+    discountPercentage: 0,
     advanceAmount: "",
     weekendPriceIncrease: "",
     map: "",
@@ -36,25 +38,38 @@ const EditWaterpark = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-
-  const handleArrayChange = (e, field) => {
-    const { value } = e.target;
+  const addItem = (field) => {
     setFormData({
       ...formData,
-      [field]: value.split(",").map((item) => item.trim()),
+      [field]: [...formData[field], ""], // Add a new empty string to the array
     });
   };
-
+  
+  const removeItem = (field, index) => {
+    const updatedArray = formData[field].filter((_, i) => i !== index); // Remove the item at the given index
+    setFormData({ ...formData, [field]: updatedArray });
+  };
+  
+  const handleArrayChange = (e, field, index) => {
+    const { value } = e.target;
+    const updatedArray = [...formData[field]];
+    updatedArray[index] = value;
+    setFormData({ ...formData, [field]: updatedArray });
+  };
+  
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(formData)
     axios
       .put(`https://waterpark-be.onrender.com/api/waterparks/${id}`, formData)
       .then((response) => {
         if (response.status === 200) {
+          toast.success("Waterpark updated successfully");
           navigate("/admin/edit-waterpark");
         }
       })
       .catch((error) => {
+        toast.error("Error updating waterpark");
         console.error("Error updating waterpark:", error);
       });
   };
@@ -106,11 +121,22 @@ const EditWaterpark = () => {
 
         {/* Price */}
         <div>
-          <label className="block font-semibold">Price</label>
+          <label className="block font-semibold">Adult Price</label>
           <input
             type="number"
-            name="price"
-            value={formData.price}
+            name="adultPrice"
+            value={formData.adultPrice}
+            onChange={handleChange}
+            className="border w-full p-2 rounded"
+            required
+          />
+        </div>
+        <div>
+          <label className="block font-semibold">Child Price</label>
+          <input
+            type="number"
+            name="childPrice"
+            value={formData.childPrice}
             onChange={handleChange}
             className="border w-full p-2 rounded"
             required
@@ -119,11 +145,11 @@ const EditWaterpark = () => {
 
         {/* Discount Price */}
         <div>
-          <label className="block font-semibold">Discount Price</label>
+          <label className="block font-semibold">Discount Percentage</label>
           <input
             type="number"
             name="discountPrice"
-            value={formData.discountPrice}
+            value={formData.discountPercentage}
             onChange={handleChange}
             className="border w-full p-2 rounded"
           />
@@ -181,31 +207,68 @@ const EditWaterpark = () => {
           </div>
         </div>
 
-        {/* Included */}
-        <div>
-          <label className="block font-semibold">Included</label>
-          <input
-            type="text"
-            name="included"
-            value={formData.included.join(", ")}
-            onChange={(e) => handleArrayChange(e, "included")}
-            className="border w-full p-2 rounded"
-            placeholder="Enter included items, separated by commas"
-          />
-        </div>
+{/* Included */}
+<div>
+  <label className="block font-semibold">Included</label>
+  {formData.included.map((item, index) => (
+    <div key={index} className="flex items-center space-x-2 mb-2">
+      <input
+        type="text"
+        name="included"
+        value={item}
+        onChange={(e) => handleArrayChange(e, "included", index)}
+        className="border w-full p-2 rounded"
+        placeholder="Enter included item"
+      />
+      <button
+        type="button"
+        onClick={() => removeItem("included", index)}
+        className="bg-red-500 text-white p-2 rounded"
+      >
+        Remove
+      </button>
+    </div>
+  ))}
+  <button
+    type="button"
+    onClick={() => addItem("included")}
+    className="bg-blue-500 text-white p-2 rounded mt-2"
+  >
+    Add Item
+  </button>
+</div>
 
-        {/* Excluded */}
-        <div>
-          <label className="block font-semibold">Excluded</label>
-          <input
-            type="text"
-            name="excluded"
-            value={formData.excluded.join(", ")}
-            onChange={(e) => handleArrayChange(e, "excluded")}
-            className="border w-full p-2 rounded"
-            placeholder="Enter excluded items, separated by commas"
-          />
-        </div>
+{/* Excluded */}
+<div>
+  <label className="block font-semibold">Excluded</label>
+  {formData.excluded.map((item, index) => (
+    <div key={index} className="flex items-center space-x-2 mb-2">
+      <input
+        type="text"
+        name="excluded"
+        value={item}
+        onChange={(e) => handleArrayChange(e, "excluded", index)}
+        className="border w-full p-2 rounded"
+        placeholder="Enter excluded item"
+      />
+      <button
+        type="button"
+        onClick={() => removeItem("excluded", index)}
+        className="bg-red-500 text-white p-2 rounded"
+      >
+        Remove
+      </button>
+    </div>
+  ))}
+  <button
+    type="button"
+    onClick={() => addItem("excluded")}
+    className="bg-blue-500 text-white p-2 rounded mt-2"
+  >
+    Add Item
+  </button>
+</div>
+
 
         {/* Submit Button */}
         <button
