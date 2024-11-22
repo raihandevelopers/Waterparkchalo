@@ -28,6 +28,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const user = JSON.parse(localStorage.getItem("user"));
 
 const isAdmin = user && user.role == 'admin' ? true : false;
+console.log(isAdmin);
 const isLoggedIn = localStorage.getItem("isLoggedIn")=="true"?true:false;
 
 const router = createBrowserRouter(
