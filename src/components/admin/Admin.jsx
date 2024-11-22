@@ -53,7 +53,31 @@ function AdminLayout() {
               }`
             }
           >
-            Get Bookings
+            Bookings
+          </NavLink>
+          <NavLink
+            to="/admin/privacypolicy"
+            className={({ isActive }) =>
+              `px-4 py-2 rounded-lg ${
+                isActive
+                  ? "bg-indigo-500 text-white font-semibold"
+                  : "hover:bg-indigo-600"
+              }`
+            }
+          >
+            Privacy Policy
+          </NavLink>
+          <NavLink
+            to="/admin/termsconditions"
+            className={({ isActive }) =>
+              `px-4 py-2 rounded-lg ${
+                isActive
+                  ? "bg-indigo-500 text-white font-semibold"
+                  : "hover:bg-indigo-600"
+              }`
+            }
+          >
+            Terms & Conditions
           </NavLink>
         </nav>
         <button
@@ -118,9 +142,8 @@ function AdminLayout() {
           >
             Edit Waterpark
           </NavLink>
-          <NavLink to="/admin/edit-waterpark/:id" className="hidden"></NavLink>
           <NavLink
-            to="/admin/get-bookings"
+            to="/admin/bookings"
             className={({ isActive }) =>
               `px-4 py-2 rounded-lg ${
                 isActive
@@ -130,7 +153,33 @@ function AdminLayout() {
             }
             onClick={() => setIsMenuOpen(false)}
           >
-            Get Bookings
+            Bookings
+          </NavLink>
+          <NavLink
+            to="/admin/privacypolicy"
+            className={({ isActive }) =>
+              `px-4 py-2 rounded-lg ${
+                isActive
+                  ? "bg-indigo-500 text-white font-semibold"
+                  : "hover:bg-indigo-600"
+              }`
+            }
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Privacy Policy
+          </NavLink>
+          <NavLink
+            to="/admin/termsconditions"
+            className={({ isActive }) =>
+              `px-4 py-2 rounded-lg ${
+                isActive
+                  ? "bg-indigo-500 text-white font-semibold"
+                  : "hover:bg-indigo-600"
+              }`
+            }
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Terms & Conditions
           </NavLink>
           <button
             onClick={() => {
