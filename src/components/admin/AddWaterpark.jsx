@@ -32,6 +32,10 @@ function AddWaterpark() {
     updatedFaqs[index][field] = value;
     setFaqs(updatedFaqs);
   };
+  const handleRemoveFaq = (index) => {
+    const updatedFaqs = faqs.filter((_, i) => i !== index); // Remove the FAQ at the given index
+    setFaqs(updatedFaqs);
+  };
   const handleListChange = (list, setList, index, value) => {
     const updatedList = [...list];
     updatedList[index] = value;
@@ -95,7 +99,7 @@ function AddWaterpark() {
       console.error(error);
       toast.error("Failed to add waterpark");
     }
-  };  useEffect(() => {
+  }; useEffect(() => {
     console.log(images)
   }, [images])
   return (
@@ -130,7 +134,7 @@ function AddWaterpark() {
           </div>
         ))}
 
-{[
+        {[
           { label: "Included", list: included, setList: setIncluded },
           { label: "Excluded", list: excluded, setList: setExcluded },
         ].map(({ label, list, setList }) => (
@@ -185,7 +189,16 @@ function AddWaterpark() {
                 className="w-1/2 px-4 py-2 border rounded-lg focus:ring focus:ring-indigo-300 focus:outline-none"
                 required
               />
+              <button
+                type="button"
+                onClick={() => handleRemoveFaq(index)} // Remove FAQ on button click
+                className="px-4 py-2 text-white bg-red-500 rounded-lg hover:bg-red-600 focus:outline-none focus:ring focus:ring-red-300"
+              >
+                Remove
+              </button>
+
             </div>
+
           ))}
           <button
             type="button"
