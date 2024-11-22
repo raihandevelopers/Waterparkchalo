@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useNavigate } from 'react-router-dom';
 
 function AddWaterpark() {
   const [formData, setFormData] = useState({
@@ -21,6 +22,7 @@ function AddWaterpark() {
   const [message, setMessage] = useState("");
   const [included, setIncluded] = useState([]);
   const [excluded, setExcluded] = useState([]);
+  const navigate = useNavigate();  // Initialize the useNavigate hook
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -62,24 +64,36 @@ function AddWaterpark() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+  
+    // Create a new FormData object on each submit to avoid leftover data
     const data = new FormData();
+  
+    // Append form data fields
     Object.entries(formData).forEach(([key, value]) => {
       data.append(key, value);
     });
+  
+    // Append other fields like faqs, included, and excluded
     data.append("faqs", JSON.stringify(faqs));
     data.append("included", JSON.stringify(included));
     data.append("excluded", JSON.stringify(excluded));
+  
+    // Append images (if any) only if present
     Array.from(images).forEach((image) => {
       data.append("images", image);
     });
-
+  
     try {
       const response = await axios.post(
         `https://waterpark-be.onrender.com/api/waterparks/add-waterpark`,
         data,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
-      toast.success("Waterpark added successfully");
+      if(response.status == 201){
+        toast.success("Waterpark added successfully");
+      }
+      console.log(response.data);
+      // Reset form data to its initial state
       setFormData({
         name: "",
         description: "",
@@ -91,15 +105,21 @@ function AddWaterpark() {
         advanceAmount: "",
         weekendPriceIncrease: "",
       });
-      setFaqs([{ question: "", answer: "" }]);
-      setIncluded([""]);
-      setExcluded([""]);
-      setImages([]);
+      setFaqs([{ question: "", answer: "" }]); // Reset FAQs
+      setIncluded([]); // Reset included
+      setExcluded([]); // Reset excluded
+      setImages([]); // Clear images array
+      window.location.reload();
+      // Optionally, you can reset the FormData object too, but it will be recreated on next submit
     } catch (error) {
       console.error(error);
       toast.error("Failed to add waterpark");
+      window.location.reload();  // This will refresh the page
     }
-  }; useEffect(() => {
+  };
+  
+  
+  useEffect(() => {
     console.log(images)
   }, [images])
   return (
