@@ -48,7 +48,7 @@ function CheckoutPage() {
     try {
       console.log("Order placed with details:", billingDetails, paymentMethod, resortId);
       // Create a booking and generate Razorpay order
-      const response = await axios.post("https://waterpark-be.onrender.com/api/bookings/create", {
+      const response = await axios.post("https://api.waterparkchalo.com/api/bookings/create", {
         waterpark: resortId,
         waterparkName: resortName,
         name: `${billingDetails.firstName} ${billingDetails.lastName}`,
@@ -88,7 +88,7 @@ function CheckoutPage() {
         handler: async (paymentResponse) => {
           try {
             // Verify payment and update booking
-            const verifyResponse = await axios.post("https://waterpark-be.onrender.com/api/bookings/verify", {
+            const verifyResponse = await axios.post("https://api.waterparkchalo.com/api/bookings/verify", {
               razorpayOrderId: order_id,
               razorpayPaymentId: paymentResponse.razorpay_payment_id,
               razorpaySignature: paymentResponse.razorpay_signature,

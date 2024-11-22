@@ -48,7 +48,7 @@ export default function UserHome() {
     console.log(email);
     try {
       const response = await axios.post(
-        'https://waterpark-be.onrender.com/api/bookings/getuserbookings', // Your backend URL
+        'https://api.waterparkchalo.com/api/bookings/getuserbookings', // Your backend URL
         { email }, // Send email to the backend
         { headers: { 'Content-Type': 'application/json' } }
       );

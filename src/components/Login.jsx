@@ -29,7 +29,7 @@ export default function AuthPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const apiUrl = `https://waterpark-be.onrender.com/api/auth/${
+    const apiUrl = `https://api.waterparkchalo.com/api/auth/${
       tabIndex === 0 ? "login" : "signup"
     }`;
 

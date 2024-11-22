@@ -25,7 +25,7 @@ const EditWaterpark = () => {
 
   useEffect(() => {
     axios
-      .get(`https://waterpark-be.onrender.com/api/waterparks/${id}`)
+      .get(`https://api.waterparkchalo.com/api/waterparks/${id}`)
       .then((response) => {
         setFormData(response.data);
       })
@@ -61,7 +61,7 @@ const EditWaterpark = () => {
     e.preventDefault();
     console.log(formData)
     axios
-      .put(`https://waterpark-be.onrender.com/api/waterparks/${id}`, formData)
+      .put(`https://api.waterparkchalo.com/api/waterparks/${id}`, formData)
       .then((response) => {
         if (response.status === 200) {
           toast.success("Waterpark updated successfully");
